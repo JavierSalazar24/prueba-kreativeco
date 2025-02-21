@@ -75,7 +75,10 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `deleted`, 
 -- Insertar datos en la tabla posts
 -- =========================================
 INSERT INTO `posts` (`id`, `title`, `description`, `date_created`, `deleted`, `user_id`) VALUES
-(1, 'Mi post numero 1', 'Este es mi primer post en la plataforma', '2025-02-19 22:25:55', 0, 5),
-(2, 'Mi segundo post', 'Este es mi segundo post', '2025-02-20 05:53:43', 0, 4);
+(1, 'Explorando el Universo', 'Un artículo sobre los misterios del cosmos y la exploración espacial.', '2025-02-19 22:25:55', 0, 5),
+(2, 'Cómo Aprender JavaScript Rápido', 'Consejos y trucos para dominar JavaScript en poco tiempo.', '2025-02-20 05:53:43', 0, 5),
+(3, 'Recetas Saludables para el Día a Día', 'Ideas de comidas saludables y deliciosas para toda la familia.', '2025-02-20 05:53:43', 0, 4),
+(4, 'Las Mejores Prácticas en Desarrollo Web', 'Buenas prácticas para escribir código limpio y eficiente en desarrollo web.', '2025-02-20 05:53:43', 0, 5),
+(5, 'Historia de la Inteligencia Artificial', 'Desde sus inicios hasta la actualidad, la evolución de la IA.', '2025-02-20 05:53:43', 0, 4);
 
 COMMIT;
