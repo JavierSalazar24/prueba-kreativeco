@@ -213,6 +213,14 @@ Cada endpoint sigue el estándar **RESTful** y requiere autenticación **JWT** p
 
 ---
 
+## **📄 Contraseñas de las cuentas**
+
+- **Contraseñas:** `12345678`
+
+---
+
+---
+
 ## **📄 Requisitos y Evaluación**
 
 ### ✅ **¿Qué cumple este proyecto?**

@@ -61,21 +61,21 @@ INSERT INTO `roles` (`id`, `name`, `permission_level`, `deleted`) VALUES
 (5, 'Rol alto', 5, 0);
 
 -- =========================================
--- Insertar datos en la tabla users
+-- Insertar datos en la tabla users ** TODAS LAS CONTRASEÑAS SON 12345678 **
 -- =========================================
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `deleted`, `rol_id`) VALUES
-(1, 'Javier', 'Salazar 1', 'javssala1@example.com', '$2y$10$Wqd083faM0.f2ficYySYTedgvdPI85QXdHsf7okGhQRxrqfyVAYuK', 0, 1),
-(2, 'Javier', 'Salazar 2', 'javssala2@example.com', '$2y$10$KMXRxFYY5kZ.0q25Hrt7jOhVSpL1MIRfigX3ro2RYDspMLTcxRbD2', 0, 2),
-(3, 'Javier', 'Salazar 3', 'javssala3@example.com', '$2y$10$zqMbdECyRbOW.nD/98xXSeED99luv2feIVt6/HEB7ZsfSi6XGGK5K', 0, 3),
-(4, 'Javier', 'Salazar 4', 'javssala4@example.com', '$2y$10$w5UXL6BYXBFhqRO5QBlsyOEtH.rMbbg3whg6LIKWo75BWw4aWs.A2', 0, 4),
-(5, 'Javier', 'Salazar 5', 'javssala5@example.com', '$2y$10$z/i5Ha//Af7pzFyb5A5BtuF9foiXumEvn/vxTPvffnhPRXDQQXX8K', 0, 5);
+(1, 'Usuario', 'Básico', 'usuariobasico@example.com', '$2y$10$Wqd083faM0.f2ficYySYTedgvdPI85QXdHsf7okGhQRxrqfyVAYuK', 0, 1),
+(2, 'Usuario', 'Medio', 'usuariomedio@example.com', '$2y$10$Wqd083faM0.f2ficYySYTedgvdPI85QXdHsf7okGhQRxrqfyVAYuK', 0, 2),
+(3, 'Usuario', 'Medio Alto', 'usuariomedioa@example.com', '$2y$10$Wqd083faM0.f2ficYySYTedgvdPI85QXdHsf7okGhQRxrqfyVAYuK', 0, 3),
+(4, 'Usuario', 'Alto Medio', 'usuarioaltom@example.com', '$2y$10$Wqd083faM0.f2ficYySYTedgvdPI85QXdHsf7okGhQRxrqfyVAYuK', 0, 4),
+(5, 'Usuario', 'Alto', 'usuarioalto@example.com', '$2y$10$Wqd083faM0.f2ficYySYTedgvdPI85QXdHsf7okGhQRxrqfyVAYuK', 0, 5),
+(6, 'Javier', 'Salazar', 'javier@example.com', '$2y$10$Wqd083faM0.f2ficYySYTedgvdPI85QXdHsf7okGhQRxrqfyVAYuK', 0, 5);
 
 -- =========================================
 -- Insertar datos en la tabla posts
 -- =========================================
 INSERT INTO `posts` (`id`, `title`, `description`, `date_created`, `deleted`, `user_id`) VALUES
 (1, 'Mi post numero 1', 'Este es mi primer post en la plataforma', '2025-02-19 22:25:55', 0, 5),
-(2, 'Mi segundo post', 'Este es mi segundo post', '2025-02-20 05:53:43', 0, 4),
-(3, 'rgrgreg', 'rggregrgg', '2025-02-21 07:03:07', 0, 5);
+(2, 'Mi segundo post', 'Este es mi segundo post', '2025-02-20 05:53:43', 0, 4);
 
 COMMIT;
