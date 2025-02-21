@@ -35,7 +35,7 @@ const deleteUserId = async (id) => {
         :key="user.id"
         :title="`${user.name} ${user.last_name}`"
         :description="user.email"
-        :subText="`Permissions: ${user.name_rol} (Level ${user.permission_level})`"
+        :subText="`Permissions: ${user.rol_name} (Level ${user.permission_level})`"
         :canEdit="rol_level >= 4"
         :canDelete="rol_level >= 5"
         @edit="updateUserId(user)"

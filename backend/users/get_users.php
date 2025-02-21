@@ -11,7 +11,7 @@
             sendResponse(405, "Método no permitido");
         }
     
-        $query = $pdo->prepare("SELECT users.id, users.name, users.last_name, users.email, roles.id AS rol_id, roles.name AS name_rol, roles.permission_level
+        $query = $pdo->prepare("SELECT users.id, users.name, users.last_name, users.email, roles.id AS rol_id, roles.name AS rol_name, roles.permission_level
                          FROM users INNER JOIN roles ON users.rol_id = roles.id WHERE users.deleted = false");
 
         $query->execute();

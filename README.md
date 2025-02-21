@@ -1,4 +1,4 @@
-# 📌 Proyecto Kreativeco
+# 💻 Proyecto Kreativeco
 
 ## **📌 Descripción General**
 
@@ -74,7 +74,7 @@ Cada endpoint sigue el estándar **RESTful** y requiere autenticación **JWT** p
     "name": "Javier",
     "last_name": "Salazar",
     "email": "javier@example.com",
-    "password": "123456",
+    "password": "12345678",
     "rol_id": 5
   }
   ```
@@ -91,7 +91,7 @@ Cada endpoint sigue el estándar **RESTful** y requiere autenticación **JWT** p
   ```json
   {
     "email": "javier@example.com",
-    "password": "123456"
+    "password": "12345678"
   }
   ```
 - **Respuesta Exitosa (200):**
@@ -127,6 +127,25 @@ Cada endpoint sigue el estándar **RESTful** y requiere autenticación **JWT** p
 - **Respuesta Exitosa (200):**
   ```json
   { "message": "Usuario eliminado" }
+  ```
+
+### **🟢 8️⃣ Consulta de Usuarios**
+
+- **Método:** `GET`
+- **URL:** `/users`
+- **Headers:** `Authorization: Bearer JWT_TOKEN`
+- **Respuesta Exitosa (200):**
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "Javier",
+      "last_name": "Salazar",
+      "email": "javier@example.com",
+      "password": "12345678",
+      "rol_name": "Rol medio"
+    }
+  ]
   ```
 
 ### **🟡 5️⃣ Creación de Publicación**
