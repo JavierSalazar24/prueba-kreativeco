@@ -1,7 +1,7 @@
 <?php
     require '../connection.php';
     require '../authMiddleware.php';
-    require '../utils/response.php';
+    require '../utils/response.php'; 
 
     try {
 

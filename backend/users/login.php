@@ -6,8 +6,12 @@
 
     use Firebase\JWT\JWT;
     use Firebase\JWT\Key;
-    $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
-    $dotenv->load();
+    use Dotenv\Dotenv;
+
+    if (file_exists(__DIR__ . '/.env')) {
+        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv->safeLoad(); 
+    }
 
     try {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

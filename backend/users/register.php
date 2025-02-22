@@ -2,7 +2,7 @@
     require '../connection.php';
     require '../authMiddleware.php';
     require '../utils/response.php';
-
+    
     try {
         validateRole(3);
     
