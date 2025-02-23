@@ -1,6 +1,6 @@
-import iziToast from 'izitoast'
 import axios from 'axios'
 import { API_HOST } from '@/config'
+import { notification } from '@/utils/notification'
 
 export const apiClient = axios.create({
   baseURL: API_HOST,
@@ -30,10 +30,7 @@ export const apiService = {
       const { data } = response.data
       return data
     } catch (error) {
-      iziToast.error({
-        message: error.response?.data?.message || 'Error en el servidor',
-        timeout: 2000,
-      })
+      notification(error.response?.data?.message || 'Error en el servidor', 'error')
       throw new Error(error.message)
     }
   },
@@ -41,13 +38,10 @@ export const apiService = {
   async post(url, data) {
     try {
       const response = await apiClient.post(url, data)
-      iziToast.info({ message: response.data.message, timeout: 2000 })
+      notification(response.data.message, 'info')
       return response.data
     } catch (error) {
-      iziToast.error({
-        message: error.response?.data?.message || 'Error en el servidor',
-        timeout: 2000,
-      })
+      notification(error.response?.data?.message || 'Error en el servidor', 'error')
       throw new Error(error.message)
     }
   },
@@ -55,13 +49,10 @@ export const apiService = {
   async put(url, data) {
     try {
       const response = await apiClient.put(url, data)
-      iziToast.success({ message: response.data.message, timeout: 2000 })
+      notification(response.data.message, 'success')
       return response.data
     } catch (error) {
-      iziToast.error({
-        message: error.response?.data?.message || 'Error en el servidor',
-        timeout: 2000,
-      })
+      notification(error.response?.data?.message || 'Error en el servidor', 'error')
       throw new Error(error.message)
     }
   },
@@ -69,13 +60,10 @@ export const apiService = {
   async delete(url, id) {
     try {
       const response = await apiClient.delete(url, { data: id })
-      iziToast.success({ message: response.data.message, timeout: 2000 })
+      notification(response.data.message, 'success')
       return response.data
     } catch (error) {
-      iziToast.error({
-        message: error.response?.data?.message || 'Error en el servidor',
-        timeout: 2000,
-      })
+      notification(error.response?.data?.message || 'Error en el servidor', 'error')
       throw new Error(error.message)
     }
   },
@@ -91,10 +79,7 @@ export const apiService = {
 
       return user
     } catch (error) {
-      iziToast.error({
-        message: error.response?.data?.message || 'Error en el servidor',
-        timeout: 2000,
-      })
+      notification(error.response?.data?.message || 'Error en el servidor', 'error')
       throw new Error(error.message)
     }
   },

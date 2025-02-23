@@ -1,5 +1,5 @@
 import { getCheckAuth, loginUser, logoutUser } from '@/api/requestUsers'
-import iziToast from 'izitoast'
+import { notification } from '@/utils/notification'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -8,9 +8,13 @@ export const useLoginStore = defineStore('login', () => {
   const logged = ref(localStorage.getItem('logged') === 'true')
 
   const login = async (data) => {
-    const userData = await loginUser(data)
-    user.value = userData
-    logged.value = true
+    try {
+      const userData = await loginUser(data)
+      user.value = userData
+      logged.value = true
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const checkAuth = async () => {
@@ -28,10 +32,7 @@ export const useLoginStore = defineStore('login', () => {
         logout()
       }
     } catch {
-      iziToast.error({
-        message: 'Token no válido',
-        timeout: 2000,
-      })
+      notification('Token no válido', 'error')
       logout()
     }
   }
