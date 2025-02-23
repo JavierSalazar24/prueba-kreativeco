@@ -4,6 +4,18 @@ USE kreativeco;
 
 -- =========================================
 -- Tabla: roles
+-- Almacenará los tokens de los usuarios al cerrar sesión, para que no se vuelvan a utilizar
+-- =========================================
+
+CREATE TABLE revoked_tokens (
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `token` TEXT NOT NULL,
+    `revoked_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- =========================================
+-- Tabla: roles
 -- Contiene los diferentes roles del sistema con sus permisos.
 -- =========================================
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -75,10 +87,10 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `password`, `deleted`, 
 -- Insertar datos en la tabla posts
 -- =========================================
 INSERT INTO `posts` (`id`, `title`, `description`, `date_created`, `deleted`, `user_id`) VALUES
-(1, 'Explorando el Universo', 'Un artículo sobre los misterios del cosmos y la exploración espacial.', '2025-02-19 22:25:55', 0, 5),
-(2, 'Cómo Aprender JavaScript Rápido', 'Consejos y trucos para dominar JavaScript en poco tiempo.', '2025-02-20 05:53:43', 0, 5),
-(3, 'Recetas Saludables para el Día a Día', 'Ideas de comidas saludables y deliciosas para toda la familia.', '2025-02-20 05:53:43', 0, 4),
-(4, 'Las Mejores Prácticas en Desarrollo Web', 'Buenas prácticas para escribir código limpio y eficiente en desarrollo web.', '2025-02-20 05:53:43', 0, 5),
-(5, 'Historia de la Inteligencia Artificial', 'Desde sus inicios hasta la actualidad, la evolución de la IA.', '2025-02-20 05:53:43', 0, 4);
+(1, 'Explorando el Universo', 'Un artículo sobre los misterios del cosmos y la exploración espacial.', '2025-02-17 22:25:55', 0, 5),
+(2, 'Cómo Aprender JavaScript Rápido', 'Consejos y trucos para dominar JavaScript en poco tiempo.', '2025-02-18 12:34:13', 0, 5),
+(3, 'Recetas Saludables para el Día a Día', 'Ideas de comidas saludables y deliciosas para toda la familia.', '2025-02-19 05:53:43', 0, 4),
+(4, 'Las Mejores Prácticas en Desarrollo Web', 'Buenas prácticas para escribir código limpio y eficiente en desarrollo web.', '2025-02-20 10:10:23', 0, 5),
+(5, 'Historia de la Inteligencia Artificial', 'Desde sus inicios hasta la actualidad, la evolución de la IA.', '2025-02-21 19:10:24', 0, 4);
 
 COMMIT;

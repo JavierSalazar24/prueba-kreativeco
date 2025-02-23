@@ -8,6 +8,8 @@ import CardBase from './CardBase.vue'
 const loginStore = useLoginStore()
 const rolesStore = useRoleStore()
 
+if (rolesStore.items.length === 0) rolesStore.loadItems()
+
 const rol_level = parseInt(loginStore.user.rol_level)
 
 const updateRoleId = (role) => {
@@ -37,6 +39,7 @@ const deleteRoleId = async (id) => {
         :subText="`Level: ${role.permission_level}`"
         :canEdit="rol_level >= 4"
         :canDelete="rol_level >= 5"
+        :store="rolesStore"
         @edit="updateRoleId(role)"
         @delete="deleteRoleId(role.id)"
       />

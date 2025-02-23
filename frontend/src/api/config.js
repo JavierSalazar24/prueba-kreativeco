@@ -79,4 +79,23 @@ export const apiService = {
       throw new Error(error.message)
     }
   },
+
+  async login(url, data) {
+    try {
+      const response = await apiClient.post(url, data)
+      const { token, user } = response.data
+
+      localStorage.setItem('token', token)
+      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('logged', 'true')
+
+      return user
+    } catch (error) {
+      iziToast.error({
+        message: error.response?.data?.message || 'Error en el servidor',
+        timeout: 2000,
+      })
+      throw new Error(error.message)
+    }
+  },
 }

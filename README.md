@@ -238,8 +238,10 @@ Cada endpoint sigue el estándar **RESTful** y requiere autenticación **JWT** p
 ## **📌 Extras**
 
 📂 **Repositorio GitHub:** `https://github.com/JavierSalazar24/prueba-kreativeco`  
-🌍 **Demo en la nube:** `[URL del despliegue]`  
-📜 **Colección Postman:** [Descargar aquí](resources/endpoints.json)
+🌍 **Demo backend en la nube:** `[https://kreativeco-api-production.up.railway.app/]`
+🌍 **Demo web completa en la nube:** `[URL del despliegue]`
+📜 **Colección Postman Local:** [Descargar aquí](resources/endpoints_local.json)
+📜 **Colección Postman Remoto:** [Descargar aquí](resources/endpoints_remote.json)
 🗄️ **Script SQL:** [Descargar aquí](resources/kreativeco.sql)
 
 ---

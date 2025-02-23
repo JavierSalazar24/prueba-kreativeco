@@ -1,6 +1,7 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue'
 import { useFormHandler } from '@/composables/useFormHandler'
+import LoaderForm from './LoaderForm.vue'
 
 const props = defineProps({
   title: String,
@@ -16,7 +17,10 @@ const { form, errorsMessage, handleSubmit, handleCancel, formTitle } = useFormHa
 
 <template>
   <section class="form-section">
-    <h2>{{ formTitle }}</h2>
+    <div class="form-content-title">
+      <h2>{{ formTitle }}</h2>
+      <LoaderForm v-if="store.loadingFetch" />
+    </div>
     <form @submit.prevent="handleSubmit" autocomplete="off">
       <div v-for="field in fields" :key="field.name" class="form-group">
         <label :for="field.name">{{ field.label }}</label>
@@ -29,6 +33,7 @@ const { form, errorsMessage, handleSubmit, handleCancel, formTitle } = useFormHa
           v-model="form[field.name]"
           :required="field.type === 'password' && entityToEdit ? false : field.required"
           :placeholder="field.placeholder"
+          :disabled="store.loadingFetch"
         />
 
         <textarea
@@ -37,6 +42,7 @@ const { form, errorsMessage, handleSubmit, handleCancel, formTitle } = useFormHa
           :name="field.name"
           v-model="form[field.name]"
           :placeholder="field.placeholder"
+          :disabled="store.loadingFetch"
         ></textarea>
 
         <select
@@ -45,6 +51,7 @@ const { form, errorsMessage, handleSubmit, handleCancel, formTitle } = useFormHa
           :name="field.name"
           v-model="form[field.name]"
           :required="field.required"
+          :disabled="store.loadingFetch"
         >
           <option v-for="option in field.options" :key="option.value" :value="option.value">
             {{ option.label }}
@@ -57,10 +64,19 @@ const { form, errorsMessage, handleSubmit, handleCancel, formTitle } = useFormHa
       </div>
 
       <div class="content-buttons">
-        <button type="submit" class="button button-publish">
+        <button
+          type="submit"
+          class="button button-publish"
+          :disabled="store.loadingFetch || store.loadingDelete"
+        >
           {{ entityToEdit ? 'Update' : 'Publish' }}
         </button>
-        <button @click="handleCancel" v-if="entityToEdit" class="button button-cancel">
+        <button
+          @click="handleCancel"
+          v-if="entityToEdit"
+          class="button button-cancel"
+          :disabled="store.loadingFetch || store.loadingDelete"
+        >
           Cancel
         </button>
       </div>

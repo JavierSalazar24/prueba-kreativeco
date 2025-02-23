@@ -1,6 +1,7 @@
 <script setup>
 import DashboardActions from '@/components/DashboardActions.vue'
 import DashboardStats from '@/components/DashboardStats.vue'
+import LoaderCard from '@/components/LoaderCard.vue'
 import { useLoginStore } from '@/stores/loginStore'
 import { usePostStore } from '@/stores/postStore'
 import { useRoleStore } from '@/stores/rolesStore'
@@ -41,8 +42,13 @@ const subtitle = computed(() =>
       </p>
 
       <div v-if="loginStore.logged">
-        <DashboardStats :stats="stats" />
-        <DashboardActions />
+        <template v-if="postStore.loading || userStore.loading || roleStore.loading">
+          <LoaderCard />
+        </template>
+        <template v-else>
+          <DashboardStats :stats="stats" />
+          <DashboardActions />
+        </template>
       </div>
     </section>
   </main>

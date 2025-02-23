@@ -1,6 +1,7 @@
 <?php
 
 require 'vendor/autoload.php';
+require 'connection.php';
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -22,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 function verifyToken() {
+    global $pdo;
+    
     $headers = apache_request_headers();
     
     if (!isset($headers['Authorization'])) {
@@ -31,6 +34,12 @@ function verifyToken() {
     }
 
     $token = str_replace("Bearer ", "", $headers['Authorization']);
+
+    $query = $pdo->prepare("SELECT * FROM revoked_tokens WHERE token = ?");
+    $query->execute([$token]);
+    if ($query->fetch()) {
+        sendResponse(401, "Token revocado, inicie sesión nuevamente");
+    }
 
     try {
         $decoded = JWT::decode($token, new Key($_ENV['SECRET_KEY'], 'HS256'));

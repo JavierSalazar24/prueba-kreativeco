@@ -113,6 +113,25 @@ h2 {
   }
 }
 
+.loader-form {
+  width: 25px;
+  padding: 5px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #e21e60;
+  --_m: conic-gradient(#0000 20%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 .container-list {
   flex: 2;
   min-width: 300px;
@@ -173,6 +192,18 @@ h2 {
   background-color: #c41c1c;
 }
 
+.edit:disabled,
+.edit:disabled:hover {
+  background-color: #78b293;
+  cursor: auto;
+}
+
+.delete:disabled,
+.delete:disabled:hover {
+  background-color: #b85656;
+  cursor: auto;
+}
+
 .card-text,
 .email-user {
   flex-grow: 1;
@@ -200,10 +231,18 @@ h2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.form-section h2 {
+.form-content-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+
+.form-content-title h2 {
   text-align: center;
-  margin-top: 0;
   font-size: 30px;
+  margin: 0;
 }
 
 .form-group {
@@ -264,6 +303,27 @@ textarea {
 
 .button-cancel:hover {
   background-color: #353535;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: #797979;
+  color: #b8b8b8;
+}
+
+.button-publish:disabled,
+.button-publish:disabled:hover {
+  background-color: #b8607d;
+  color: #ddcccc;
+  cursor: auto;
+}
+
+.button-cancel:disabled,
+.button-cancel:disabled:hover {
+  background-color: #888888;
+  color: #c4c4c4;
+  cursor: auto;
 }
 
 @media (max-width: 768px) {

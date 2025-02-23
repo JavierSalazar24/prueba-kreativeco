@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "a5fd70c3-1617-456b-b744-4af090d95c9d",
+    "name": "Kreativeco API",
+    "description": "Colección de endpoints para la API de Kreativeco",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38884393"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Javier\",\r\n  \"last_name\": \"Salazar\",\r\n  \"email\": \"javier@example.com\",\r\n  \"password\": \"12345678\",\r\n  \"rol_id\": 2\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/users/register.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["users", "register.php"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"javier@actualizado.com\",\r\n    \"password\": \"09876543\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/users/login.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["users", "login.php"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit user",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 6,\r\n    \"name\": \"Javier actualizado\",\r\n    \"last_name\": \"Salazar actualizado\",\r\n    \"email\": \"javier@actualizado.com\",\r\n    \"password\": \"09876543\",\r\n    \"rol_id\": 5\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/users/update_user.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["users", "update_user.php"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 6\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/users/delete_user.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["users", "delete_user.php"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get users",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/users/get_users.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["users", "get_users.php"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create post",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Mi nuevo post\",\r\n  \"description\": \"Contenido del post\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/posts/create_post.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["posts", "create_post.php"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit post",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 4,\r\n    \"title\": \"Mi nuevo post actualizado\",\r\n    \"description\": \"Contenido del post actualizado\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/posts/update_post.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["posts", "update_post.php"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete post",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 4\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/posts/delete_post.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["posts", "delete_post.php"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get posts",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    }
+  ]
+}

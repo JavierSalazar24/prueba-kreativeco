@@ -1,18 +1,18 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useLoginStore } from '@/stores/loginStore'
-import { loginUser } from '@/api/requestUsers'
 import { loginSchema } from '@/schemas/validateSchemas'
 
 export function useLoginForm() {
   const router = useRouter()
   const loginStore = useLoginStore()
 
+  if (loginStore.logged) router.push('/')
+
   const email = ref('')
   const password = ref('')
   const errorsMessage = ref({})
-
-  if (loginStore.logged) router.push('/')
+  const loading = ref(false)
 
   const resetForm = () => {
     email.value = ''
@@ -39,13 +39,15 @@ export function useLoginForm() {
     if (!validateForm()) return
 
     try {
-      const userData = await loginUser({ email: email.value, password: password.value })
-      loginStore.user = userData
-      loginStore.logged = true
+      loading.value = true
+      const data = { email: email.value, password: password.value }
+      await loginStore.login(data)
       resetForm()
       router.push('/')
     } catch (error) {
       console.error(error)
+    } finally {
+      loading.value = false
     }
   }
 
@@ -55,5 +57,6 @@ export function useLoginForm() {
     errorsMessage,
     handleLogin,
     resetForm,
+    loading,
   }
 }

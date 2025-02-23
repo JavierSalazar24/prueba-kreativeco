@@ -1,7 +1,7 @@
 <script setup>
 import { useLoginForm } from '@/composables/useLoginForm'
 
-const { email, password, errorsMessage, handleLogin } = useLoginForm()
+const { email, password, errorsMessage, handleLogin, loading } = useLoginForm()
 </script>
 
 <template>
@@ -29,7 +29,7 @@ const { email, password, errorsMessage, handleLogin } = useLoginForm()
           }}</span>
         </div>
 
-        <button type="submit">Log In</button>
+        <button type="submit" :disabled="loading">{{ loading ? 'Loading...' : 'Log In' }}</button>
       </form>
     </section>
   </main>
@@ -89,6 +89,11 @@ input[type='password']:focus {
   border-color: #e21e60;
 }
 
+input:disabled {
+  background-color: #797979;
+  color: #b8b8b8;
+}
+
 button {
   width: 100%;
   padding: 0.75rem;
@@ -103,6 +108,13 @@ button {
 
 button:hover {
   background-color: #8d153d;
+}
+
+button:disabled,
+button:disabled:hover {
+  background-color: #b8607d;
+  color: #ddcccc;
+  cursor: auto;
 }
 
 .error-message {
