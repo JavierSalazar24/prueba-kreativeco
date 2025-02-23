@@ -40,7 +40,6 @@ const { email, password, errorsMessage, handleLogin, loading } = useLoginForm()
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
   background-color: #09090a;
   font-family: Arial, sans-serif;
   margin-top: 2rem;

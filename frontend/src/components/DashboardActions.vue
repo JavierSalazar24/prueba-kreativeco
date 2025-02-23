@@ -40,4 +40,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 380px) {
+  h2 {
+    font-size: 30px;
+  }
+}
 </style>

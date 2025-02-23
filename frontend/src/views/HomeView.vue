@@ -59,7 +59,7 @@ const subtitle = computed(() =>
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  margin-top: 2rem;
   font-family: Arial, sans-serif;
   color: #ffffff;
   padding: 0 2rem;
@@ -75,6 +75,7 @@ const subtitle = computed(() =>
 }
 
 h1 {
+  text-align: center;
   color: #e21e60;
   margin-bottom: 0.5rem;
   font-size: 35px;
@@ -82,7 +83,23 @@ h1 {
 }
 
 .subtitle {
+  text-align: center;
   color: #a0aec0;
   margin-bottom: 2rem;
+}
+
+@media (max-width: 550px) {
+  .welcome-container {
+    padding: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  h1 {
+    font-size: 25px;
+  }
+  .subtitle {
+    font-size: 15px;
+  }
 }
 </style>

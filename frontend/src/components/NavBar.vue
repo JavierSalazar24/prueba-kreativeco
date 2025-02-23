@@ -19,13 +19,18 @@ const toggleMenu = () => {
     <button class="menu-toggle" @click="toggleMenu">☰</button>
 
     <div class="navbar__links" :class="{ open: isMenuOpen }">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink v-if="!loginStore.logged" to="/login">Login</RouterLink>
-      <RouterLink v-if="loginStore.logged" to="/meposts">Me Posts</RouterLink>
-      <RouterLink v-if="loginStore.logged" to="/posts">Posts</RouterLink>
-      <RouterLink v-if="loginStore.logged" to="/users">Users</RouterLink>
-      <RouterLink v-if="loginStore.logged" to="/roles">Roles</RouterLink>
-      <RouterLink v-if="loginStore.logged" @click.prevent="loginStore.logout" to="#">
+      <RouterLink to="/" @click="toggleMenu">Home</RouterLink>
+      <RouterLink v-if="!loginStore.logged" to="/login" @click="toggleMenu">Login</RouterLink>
+      <RouterLink v-if="loginStore.logged" to="/meposts" @click="toggleMenu">Me Posts</RouterLink>
+      <RouterLink v-if="loginStore.logged" to="/posts" @click="toggleMenu">Posts</RouterLink>
+      <RouterLink v-if="loginStore.logged" to="/users" @click="toggleMenu">Users</RouterLink>
+      <RouterLink v-if="loginStore.logged" to="/roles" @click="toggleMenu">Roles</RouterLink>
+      <RouterLink
+        v-if="loginStore.logged"
+        @click.prevent="loginStore.logout"
+        to="#"
+        @click="toggleMenu"
+      >
         Log out
       </RouterLink>
     </div>
