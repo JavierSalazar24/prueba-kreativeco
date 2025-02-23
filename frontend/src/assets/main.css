@@ -253,7 +253,7 @@ h2 {
 
 label {
   margin-bottom: 0.5rem;
-  color: #a0aec0;
+  color: #b1b1b1;
 }
 
 input,
@@ -261,7 +261,7 @@ select,
 textarea {
   padding: 0.5rem;
   background-color: #18181a;
-  border: 1px solid #2d3748;
+  border: 1px solid #38383b;
   border-radius: 4px;
   color: #ffffff;
   font-family: sans-serif;

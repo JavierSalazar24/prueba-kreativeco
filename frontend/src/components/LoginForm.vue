@@ -46,7 +46,7 @@ const { email, password, errorsMessage, handleLogin, loading } = useLoginForm()
 }
 
 .login-form {
-  background-color: #1a202c;
+  background-color: #18181a;
   padding: 2rem;
   border-radius: 8px;
   width: 100%;
@@ -69,14 +69,14 @@ h2 {
 label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #a0aec0;
+  color: #b1b1b1;
 }
 
 input[type='email'],
 input[type='password'] {
   padding: 0.75rem;
-  background-color: #2d3748;
-  border: 1px solid #4a5568;
+  background-color: #18181a;
+  border: 1px solid #38383b;
   border-radius: 4px;
   color: #ffffff;
   font-size: 1rem;

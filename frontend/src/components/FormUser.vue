@@ -6,10 +6,22 @@ import BaseForm from '@/components/BaseForm.vue'
 const userStore = useUserStore()
 
 const fields = [
-  { name: 'name', label: 'Name', type: 'text', required: true },
-  { name: 'last_name', label: 'Last name', type: 'text', required: true },
-  { name: 'email', label: 'Email', type: 'email', required: true },
-  { name: 'password', label: 'Password', type: 'password', required: true },
+  { name: 'name', label: 'Name', type: 'text', required: true, placeholder: 'Javier' },
+  { name: 'last_name', label: 'Last name', type: 'text', required: true, placeholder: 'Salazar' },
+  {
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    required: true,
+    placeholder: 'example@example.com',
+  },
+  {
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+    required: true,
+    placeholder: '********',
+  },
   {
     name: 'rol_id',
     label: 'Role',

@@ -6,8 +6,14 @@ import { useRoleStore } from '@/stores/rolesStore'
 const roleStore = useRoleStore()
 
 const fields = [
-  { name: 'name', label: 'Name', type: 'text', required: true },
-  { name: 'permission_level', label: 'Permission level', type: 'number', required: true },
+  { name: 'name', label: 'Name', type: 'text', required: true, placeholder: 'Super admin' },
+  {
+    name: 'permission_level',
+    label: 'Permission level',
+    type: 'number',
+    required: true,
+    placeholder: '10',
+  },
 ]
 
 const handleSubmit = async (data) => {

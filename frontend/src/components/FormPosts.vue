@@ -6,8 +6,20 @@ import BaseForm from '@/components/BaseForm.vue'
 const postStore = usePostStore()
 
 const fields = [
-  { name: 'title', label: 'Title', type: 'text', required: true },
-  { name: 'description', label: 'Description', type: 'textarea', required: true },
+  {
+    name: 'title',
+    label: 'Title',
+    type: 'text',
+    required: true,
+    placeholder: 'Aprende Vue rápido',
+  },
+  {
+    name: 'description',
+    label: 'Description',
+    type: 'textarea',
+    required: true,
+    placeholder: 'Con estos consejos dominarás Vue rápidamente...',
+  },
 ]
 
 const handleSubmit = async (data) => {
