@@ -14,8 +14,9 @@ try {
     $DB_NAME = $_ENV['DB_NAME'];
     $DB_USER = $_ENV['DB_USER'];
     $DB_PASSWORD = $_ENV['DB_PASSWORD'];
+    $DB_PORT = $_ENV['DB_PORT'];
 
-    $pdo = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8", $DB_USER, $DB_PASSWORD);
+    $pdo = new PDO("mysql:host=$DB_HOST;port=$DB_PORT;dbname=$DB_NAME;charset=utf8", $DB_USER, $DB_PASSWORD);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     http_response_code(500);
