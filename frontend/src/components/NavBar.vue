@@ -23,7 +23,7 @@ const toggleMenu = () => {
     <div class="navbar__links" :class="{ open: isMenuOpen }">
       <RouterLink to="/" @click="toggleMenu">Home</RouterLink>
       <RouterLink v-if="!loginStore.logged" to="/login" @click="toggleMenu">Login</RouterLink>
-      <RouterLink v-if="loginStore.logged && rol_level >= 4" to="/meposts" @click="toggleMenu"
+      <RouterLink v-if="loginStore.logged && rol_level >= 3" to="/meposts" @click="toggleMenu"
         >Me Posts</RouterLink
       >
       <RouterLink v-if="loginStore.logged && rol_level >= 2" to="/posts" @click="toggleMenu"
