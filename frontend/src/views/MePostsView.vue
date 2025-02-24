@@ -9,7 +9,10 @@ const postStore = usePostStore()
 const loginStore = useLoginStore()
 const router = useRouter()
 
+const rol_level = parseInt(loginStore.user.rol_level)
+
 if (!loginStore.logged) router.push('/login')
+else if (rol_level < 2) router.push('/')
 
 onMounted(() => {
   postStore.resetStore()

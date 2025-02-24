@@ -13,13 +13,16 @@ const postStore = usePostStore()
 const userStore = useUserStore()
 const roleStore = useRoleStore()
 
+const rol_level = parseInt(loginStore.user.rol_level)
+
 watchEffect(() => {
-  if (loginStore.logged) {
+  if (loginStore.logged && rol_level >= 2) {
     userStore.loadItems()
     postStore.loadItems()
     roleStore.loadItems()
   }
 })
+
 const stats = computed(() => [
   { title: 'Posts', count: postStore.items.length },
   { title: 'Users', count: userStore.items.length },
@@ -36,12 +39,12 @@ const subtitle = computed(() =>
 <template>
   <main class="welcome-container">
     <section class="welcome-panel">
-      <h1>Welcome, {{ loginStore.user.name || 'new user' }}!</h1>
+      <h1>Welcome, {{ `${loginStore.user.name} ${loginStore.user.last_name}` || 'new user' }}!</h1>
       <p class="subtitle">
         {{ subtitle }}
       </p>
 
-      <div v-if="loginStore.logged">
+      <div v-if="loginStore.logged && rol_level >= 2">
         <template v-if="postStore.loading || userStore.loading || roleStore.loading">
           <LoaderCard />
         </template>
@@ -49,6 +52,9 @@ const subtitle = computed(() =>
           <DashboardStats :stats="stats" />
           <DashboardActions />
         </template>
+      </div>
+      <div class="not-access" v-else>
+        <p>You do not have permissions to request the information, only to access.</p>
       </div>
     </section>
   </main>
@@ -77,7 +83,7 @@ const subtitle = computed(() =>
 h1 {
   text-align: center;
   color: #e21e60;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
   font-size: 35px;
   margin-top: 0;
 }
@@ -86,6 +92,11 @@ h1 {
   text-align: center;
   color: #a0aec0;
   margin-bottom: 2rem;
+}
+
+.not-access {
+  text-align: center;
+  margin: 0;
 }
 
 @media (max-width: 550px) {

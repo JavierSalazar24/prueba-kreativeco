@@ -1,9 +1,11 @@
 <script setup>
 import { useLoginStore } from '@/stores/loginStore'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const loginStore = useLoginStore()
 const isMenuOpen = ref(false)
+
+const rol_level = computed(() => parseInt(loginStore.user?.rol_level || 0))
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -21,10 +23,18 @@ const toggleMenu = () => {
     <div class="navbar__links" :class="{ open: isMenuOpen }">
       <RouterLink to="/" @click="toggleMenu">Home</RouterLink>
       <RouterLink v-if="!loginStore.logged" to="/login" @click="toggleMenu">Login</RouterLink>
-      <RouterLink v-if="loginStore.logged" to="/meposts" @click="toggleMenu">Me Posts</RouterLink>
-      <RouterLink v-if="loginStore.logged" to="/posts" @click="toggleMenu">Posts</RouterLink>
-      <RouterLink v-if="loginStore.logged" to="/users" @click="toggleMenu">Users</RouterLink>
-      <RouterLink v-if="loginStore.logged" to="/roles" @click="toggleMenu">Roles</RouterLink>
+      <RouterLink v-if="loginStore.logged && rol_level >= 4" to="/meposts" @click="toggleMenu"
+        >Me Posts</RouterLink
+      >
+      <RouterLink v-if="loginStore.logged && rol_level >= 2" to="/posts" @click="toggleMenu"
+        >Posts</RouterLink
+      >
+      <RouterLink v-if="loginStore.logged && rol_level >= 2" to="/users" @click="toggleMenu"
+        >Users</RouterLink
+      >
+      <RouterLink v-if="loginStore.logged && rol_level >= 2" to="/roles" @click="toggleMenu"
+        >Roles</RouterLink
+      >
       <RouterLink
         v-if="loginStore.logged"
         @click.prevent="loginStore.logout"
