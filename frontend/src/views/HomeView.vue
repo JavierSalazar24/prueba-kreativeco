@@ -39,7 +39,10 @@ const subtitle = computed(() =>
 <template>
   <main class="welcome-container">
     <section class="welcome-panel">
-      <h1>Welcome, {{ `${loginStore.user.name} ${loginStore.user.last_name}` || 'new user' }}!</h1>
+      <h1 v-if="loginStore.logged">
+        Welcome, {{ `${loginStore.user.name} ${loginStore.user.last_name}` || 'new user' }}!
+      </h1>
+      <h1 v-else>Welcome, new user!</h1>
       <p class="subtitle">
         {{ subtitle }}
       </p>
