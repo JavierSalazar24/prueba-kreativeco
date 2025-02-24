@@ -56,7 +56,7 @@ const subtitle = computed(() =>
           <DashboardActions />
         </template>
       </div>
-      <div class="not-access" v-else>
+      <div class="not-access" v-else-if="loginStore.logged && rol_level < 2">
         <p>You do not have permissions to request the information, only to access.</p>
       </div>
     </section>
