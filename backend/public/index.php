@@ -8,7 +8,7 @@ try {
         exit;
     }
     
-    $uri = trim($_SERVER['REQUEST_URI'], '/');
+    $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
     $segments = explode('/', $uri);
     
     if ($uri === '' || $uri === 'index.php') {
@@ -18,7 +18,7 @@ try {
     
     $routes = ['users', 'posts', 'roles', 'auth'];
     
-    $baseRoute = $segments[1];
+    $baseRoute = isset($segments[1]) ? $segments[1] : null;
     $id = isset($segments[2]) ? (int) $segments[2] : null;
     
     if ($baseRoute === 'auth') {

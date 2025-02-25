@@ -32,26 +32,21 @@ class AuthController {
             $user = $this->userModel->getByEmail($data['email']);
     
             if ($user && password_verify($data['password'], $user['password'])) {
-                $token = JWT::encode([
+                $userToken = [
                     "id" => $user['id'], 
                     "name" => $user['name'], 
                     "last_name" => $user['last_name'], 
                     "email" => $user['email'], 
                     "rol" => $user['rol_name'],
-                    "rol_level" => $user['rol_level'],
+                    "roles" => $user['roles'],
                     "exp" => time() + (7 * 24 * 60 * 60)
-                ], $_ENV['SECRET_KEY'], 'HS256');
+                ];
+
+                $token = JWT::encode($userToken, $_ENV['SECRET_KEY'], 'HS256');
             
                 Response::sendResponse(200, "Login exitoso", [
                     "token" => $token,
-                    "user" => [
-                        "id" => $user['id'],
-                        "name" => $user['name'],
-                        "last_name" => $user['last_name'],
-                        "email" => $user['email'],
-                        "rol" => $user['rol_name'],
-                        "rol_level" => $user['rol_level']
-                    ]
+                    "user" => $userToken
                 ]);
             } else {
                 Response::sendResponse(401, "Credenciales inválidas");

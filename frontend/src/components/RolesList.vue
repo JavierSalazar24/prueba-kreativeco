@@ -1,20 +1,22 @@
 <script setup>
 import Swal from 'sweetalert2'
-import { useLoginStore } from '@/stores/loginStore'
-import LoaderCard from './LoaderCard.vue'
 import { useRoleStore } from '@/stores/rolesStore'
+import { useRoles } from '@/composables/useRoles'
+import LoaderCard from './LoaderCard.vue'
 import EmptyCard from './EmptyCard.vue'
 import CardBase from './CardBase.vue'
 
-const loginStore = useLoginStore()
 const rolesStore = useRoleStore()
 
 if (rolesStore.items.length === 0) rolesStore.loadItems()
 
-const rol_level = parseInt(loginStore.user.rol_level)
+const { hasPermission } = useRoles()
 
 const updateRoleId = (role) => {
-  rolesStore.itemToEdit = { ...role }
+  rolesStore.itemToEdit = {
+    ...role,
+    permissions: role.permissions ? role.permissions.split(',') : [],
+  }
 }
 
 const deleteRoleId = async (id) => {
@@ -45,9 +47,9 @@ const deleteRoleId = async (id) => {
         v-for="role in rolesStore.items"
         :key="role.id"
         :title="role.name"
-        :subText="`Level: ${role.permission_level}`"
-        :canEdit="rol_level >= 4"
-        :canDelete="rol_level >= 5"
+        :subText="`Permisos: ${role.permissions.split(',').join(', ')}.`"
+        :canEdit="hasPermission('actualizar')"
+        :canDelete="hasPermission('eliminar')"
         :store="rolesStore"
         @edit="updateRoleId(role)"
         @delete="deleteRoleId(role.id)"

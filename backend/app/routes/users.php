@@ -16,18 +16,18 @@ $id = isset($segments[2]) ? (int) $segments[2] : null;
 try {
     switch ($method) {
         case 'GET':
-            AuthMiddleware::validateRole(2);
+            AuthMiddleware::validatePermission('consulta');
             $controller->getUsers();
             break;
         
         case 'POST':
-            AuthMiddleware::validateRole(3);
+            AuthMiddleware::validatePermission('agregar');
             $data = json_decode(file_get_contents("php://input"), true);
             $controller->createUser($data);
             break;
         
         case 'PUT':
-            AuthMiddleware::validateRole(4);
+            AuthMiddleware::validatePermission('actualizar');
             $data = json_decode(file_get_contents("php://input"), true);
             if ($id) {
                 $controller->updateUser($id, $data);
@@ -37,7 +37,7 @@ try {
             break;
         
         case 'DELETE':
-            AuthMiddleware::validateRole(5);
+            AuthMiddleware::validatePermission('eliminar');
             $data = json_decode(file_get_contents("php://input"), true);
             if ($id) {
                 $controller->deleteUser($id);

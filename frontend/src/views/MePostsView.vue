@@ -1,18 +1,17 @@
 <script setup>
 import PostsList from '@/components/PostsList.vue'
-import { useLoginStore } from '@/stores/loginStore'
+import { useRoles } from '@/composables/useRoles'
 import { usePostStore } from '@/stores/postStore'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const postStore = usePostStore()
-const loginStore = useLoginStore()
 const router = useRouter()
 
-const rol_level = parseInt(loginStore.user.rol_level)
+const { hasPermission, logged } = useRoles()
 
-if (!loginStore.logged) router.push('/login')
-else if (rol_level < 2) router.push('/')
+if (!logged) router.push('/login')
+else if (!hasPermission('agregar')) router.push('/')
 
 onMounted(() => {
   postStore.resetStore()

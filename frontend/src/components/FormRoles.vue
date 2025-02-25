@@ -8,11 +8,18 @@ const roleStore = useRoleStore()
 const fields = [
   { name: 'name', label: 'Name', type: 'text', required: true, placeholder: 'Super admin' },
   {
-    name: 'permission_level',
-    label: 'Permission level',
-    type: 'number',
+    name: 'permissions',
+    label: 'Permissions',
+    type: 'select',
     required: true,
-    placeholder: '10',
+    multiple: true,
+    options: [
+      { label: 'Acceso', value: 'acceso' },
+      { label: 'Consulta', value: 'consulta' },
+      { label: 'Agregar', value: 'agregar' },
+      { label: 'Actualizar', value: 'actualizar' },
+      { label: 'Eliminar', value: 'eliminar' },
+    ],
   },
 ]
 

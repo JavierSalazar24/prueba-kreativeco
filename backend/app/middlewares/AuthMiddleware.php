@@ -34,11 +34,18 @@ class AuthMiddleware {
         }
     }
 
-    public static function validateRole($level) {
+    public static function validatePermission($requiredPermission) {
         $user = self::verifyToken();
-        if ($user['rol_level'] < $level) {
-            Response::sendResponse(403, "No tienes permisos");
+    
+        $permissions = $user['roles'];
+    
+        $permissionsArray = explode(',', $permissions);
+    
+        if (!in_array($requiredPermission, $permissionsArray)) {
+            Response::sendResponse(403, "No tienes permisos para esta acción");
         }
+    
         return $user;
     }
+    
 }

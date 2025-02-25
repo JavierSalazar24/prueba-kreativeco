@@ -3,6 +3,7 @@ namespace Models;
 use Config\Database;
 use PDO;
 use PDOException;
+use Exception;
 
 class Post {
     private $pdo;

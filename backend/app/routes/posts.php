@@ -16,22 +16,22 @@ $id = isset($segments[2]) ? (int) $segments[2] : null;
 try {
     switch ($method) {
         case 'GET':
+            AuthMiddleware::validatePermission('consulta');
             if (isset($_GET['me'])) {
                 $controller->getMyPosts($user['id']);
             } else {
-                AuthMiddleware::validateRole(2);
                 $controller->getPosts();
             }
             break;
 
         case 'POST':
-            AuthMiddleware::validateRole(3);
+            AuthMiddleware::validatePermission('agregar');
             $data = json_decode(file_get_contents("php://input"), true);
             $controller->createPost($data, $user['id']);
             break;
 
         case 'PUT':
-            AuthMiddleware::validateRole(4);
+            AuthMiddleware::validatePermission('actualizar');
             $data = json_decode(file_get_contents("php://input"), true);
             if ($id) {
                 $controller->updatePost($id, $data);
@@ -41,7 +41,7 @@ try {
             break;
 
         case 'DELETE':
-            AuthMiddleware::validateRole(5);
+            AuthMiddleware::validatePermission('eliminar');
             $data = json_decode(file_get_contents("php://input"), true);
             if ($id) {
                 $controller->deletePost($id);

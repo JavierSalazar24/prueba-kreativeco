@@ -3,6 +3,7 @@ namespace Models;
 use Config\Database;
 use PDO;
 use PDOException;
+use Exception;
 
 class User {
     private $pdo;
@@ -13,7 +14,7 @@ class User {
 
     public function getAll() {
         try {
-            $query = $this->pdo->prepare("SELECT users.id, users.name, users.last_name, users.email, roles.id AS rol_id, roles.name AS rol_name, roles.permission_level
+            $query = $this->pdo->prepare("SELECT users.id, users.name, users.last_name, users.email, roles.id AS rol_id, roles.name AS rol_name, roles.permissions
             FROM users INNER JOIN roles ON users.rol_id = roles.id WHERE users.deleted = false");
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -95,7 +96,7 @@ class User {
 
     public function getByEmail($email) {
         try {
-            $query = $this->pdo->prepare("SELECT users.id, users.name, users.last_name, users.email, users.password, roles.name AS rol_name, roles.permission_level AS rol_level FROM users INNER JOIN roles ON users.rol_id = roles.id WHERE email = ? AND users.deleted = false");
+            $query = $this->pdo->prepare("SELECT users.id, users.name, users.last_name, users.email, users.password, roles.name AS rol_name, roles.permissions AS roles FROM users INNER JOIN roles ON users.rol_id = roles.id WHERE email = ? AND users.deleted = false");
             $query->execute([$email]);
             return $query->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

@@ -21,7 +21,7 @@ class RoleController {
 
     public function createRole($data) {
         try {
-            if (!isset($data['name'], $data['permission_level'])) {
+            if (!isset($data['name'], $data['permissions'])) {
                 Response::sendResponse(400, "Todos los campos son obligatorios");
             }
     
@@ -39,7 +39,7 @@ class RoleController {
 
     public function updateRole($id, $data) {
         try {
-            if (!$id || !isset($data['name'], $data['permission_level'])) {
+            if (!$id || !isset($data['name'], $data['permissions'])) {
                 Response::sendResponse(400, "Todos los campos son obligatorios");
             }
     

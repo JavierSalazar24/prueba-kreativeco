@@ -3,6 +3,7 @@ namespace Models;
 use Config\Database;
 use PDO;
 use PDOException;
+use Exception;
 
 class Role {
     private $pdo;
@@ -23,15 +24,10 @@ class Role {
 
     public function create($data) {
         try {
-            $checkRole = $this->pdo->prepare("SELECT permission_level FROM roles WHERE permission_level = ?");
-            $checkRole->execute([$data['permission_level']]);
+            $permissionsString = implode(',', $data['permissions']);
 
-            if ($checkRole->rowCount() > 0) {
-                return ["error" => "El nivel de permisos ya existe"];
-            }
-
-            $query = $this->pdo->prepare("INSERT INTO roles (name, permission_level) VALUES (?, ?)");
-            return $query->execute([$data['name'], $data['permission_level']]);
+            $query = $this->pdo->prepare("INSERT INTO roles (name, permissions) VALUES (?, ?)");
+            return $query->execute([$data['name'], $permissionsString]);
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
@@ -46,15 +42,10 @@ class Role {
                 return ["error" => "Registro no encontrado"];
             }
 
-            $checkRole = $this->pdo->prepare("SELECT id FROM roles WHERE permission_level = ? AND id != ?");
-            $checkRole->execute([$data['permission_level'], $data['id']]);
+            $permissionsString = implode(',', $data['permissions']);
 
-            if ($checkRole->rowCount() > 0) {
-                return ["error" => "El nivel de permisos ya existe en otro rol"];
-            }
-
-            $query = $this->pdo->prepare("UPDATE roles SET name = ?, permission_level = ? WHERE id = ?");
-            return $query->execute([$data['name'], $data['permission_level'], $data['id']]);
+            $query = $this->pdo->prepare("UPDATE roles SET name = ?, permissions = ? WHERE id = ?");
+            return $query->execute([$data['name'], $permissionsString, $data['id']]);
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }

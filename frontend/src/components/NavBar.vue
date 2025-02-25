@@ -1,11 +1,10 @@
 <script setup>
-import { useLoginStore } from '@/stores/loginStore'
-import { computed, ref } from 'vue'
+import { useRoles } from '@/composables/useRoles'
+import { ref } from 'vue'
 
-const loginStore = useLoginStore()
 const isMenuOpen = ref(false)
 
-const rol_level = computed(() => parseInt(loginStore.user?.rol_level || 0))
+const { hasPermission, logged, logout } = useRoles()
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -22,25 +21,20 @@ const toggleMenu = () => {
 
     <div class="navbar__links" :class="{ open: isMenuOpen }">
       <RouterLink to="/" @click="toggleMenu">Home</RouterLink>
-      <RouterLink v-if="!loginStore.logged" to="/login" @click="toggleMenu">Login</RouterLink>
-      <RouterLink v-if="loginStore.logged && rol_level >= 3" to="/meposts" @click="toggleMenu"
+      <RouterLink v-if="!logged" to="/login" @click="toggleMenu">Login</RouterLink>
+      <RouterLink v-if="logged && hasPermission('agregar')" to="/meposts" @click="toggleMenu"
         >Me Posts</RouterLink
       >
-      <RouterLink v-if="loginStore.logged && rol_level >= 2" to="/posts" @click="toggleMenu"
+      <RouterLink v-if="logged && hasPermission('consulta')" to="/posts" @click="toggleMenu"
         >Posts</RouterLink
       >
-      <RouterLink v-if="loginStore.logged && rol_level >= 2" to="/users" @click="toggleMenu"
+      <RouterLink v-if="logged && hasPermission('consulta')" to="/users" @click="toggleMenu"
         >Users</RouterLink
       >
-      <RouterLink v-if="loginStore.logged && rol_level >= 2" to="/roles" @click="toggleMenu"
+      <RouterLink v-if="logged && hasPermission('consulta')" to="/roles" @click="toggleMenu"
         >Roles</RouterLink
       >
-      <RouterLink
-        v-if="loginStore.logged"
-        @click.prevent="loginStore.logout"
-        to="#"
-        @click="toggleMenu"
-      >
+      <RouterLink v-if="logged" @click.prevent="logout" to="#" @click="toggleMenu">
         Log out
       </RouterLink>
     </div>

@@ -1,19 +1,18 @@
 <script setup>
 import FormPosts from '@/components/FormPosts.vue'
 import PostsList from '@/components/PostsList.vue'
-import { useLoginStore } from '@/stores/loginStore'
+import { useRoles } from '@/composables/useRoles'
 import { usePostStore } from '@/stores/postStore'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const postStore = usePostStore()
-const loginStore = useLoginStore()
 const router = useRouter()
 
-const rol_level = parseInt(loginStore.user.rol_level)
+const { hasPermission, logged } = useRoles()
 
-if (!loginStore.logged) router.push('/login')
-else if (rol_level < 2) router.push('/')
+if (!logged) router.push('/login')
+else if (!hasPermission('consulta')) router.push('/')
 
 onMounted(() => {
   postStore.resetStore()
@@ -23,8 +22,8 @@ onMounted(() => {
 
 <template>
   <div class="container">
-    <FormPosts v-if="rol_level >= 3" />
+    <FormPosts v-if="hasPermission('agregar')" />
 
-    <PostsList />
+    <PostsList v-if="hasPermission('consulta')" />
   </div>
 </template>

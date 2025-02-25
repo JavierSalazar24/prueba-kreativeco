@@ -1,17 +1,16 @@
 <script setup>
 import Swal from 'sweetalert2'
 import { useUserStore } from '@/stores/userStore'
+import { useRoles } from '@/composables/useRoles'
 import LoaderCard from './LoaderCard.vue'
-import { useLoginStore } from '@/stores/loginStore'
 import EmptyCard from './EmptyCard.vue'
 import CardBase from './CardBase.vue'
 
-const loginStore = useLoginStore()
 const userStore = useUserStore()
 
 if (userStore.items.length === 0) userStore.loadItems()
 
-const rol_level = parseInt(loginStore.user.rol_level)
+const { hasPermission } = useRoles()
 
 const updateUserId = (user) => {
   userStore.itemToEdit = { ...user }
@@ -46,9 +45,9 @@ const deleteUserId = async (id) => {
         :key="user.id"
         :title="`${user.name} ${user.last_name}`"
         :description="user.email"
-        :subText="`Permissions: ${user.rol_name} (Level ${user.permission_level})`"
-        :canEdit="rol_level >= 4"
-        :canDelete="rol_level >= 5"
+        :subText="`${user.rol_name} (Permisos: ${user.permissions.split(',').join(', ')}).`"
+        :canEdit="hasPermission('actualizar')"
+        :canDelete="hasPermission('eliminar')"
         :store="userStore"
         @edit="updateUserId(user)"
         @delete="deleteUserId(user.id)"

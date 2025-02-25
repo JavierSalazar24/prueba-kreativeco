@@ -24,7 +24,6 @@ export const roleSchema = z.object({
     .string()
     .min(3, 'Name must be at least 3 characters long')
     .max(100, 'Name cannot exceed 100 characters'),
-  permission_level: z.number().int().min(1, 'Permission level must be greater than 1'),
 })
 
 export const registerSchema = z.object({

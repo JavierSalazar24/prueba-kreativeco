@@ -2,6 +2,7 @@
 import DashboardActions from '@/components/DashboardActions.vue'
 import DashboardStats from '@/components/DashboardStats.vue'
 import LoaderCard from '@/components/LoaderCard.vue'
+import { useRoles } from '@/composables/useRoles'
 import { useLoginStore } from '@/stores/loginStore'
 import { usePostStore } from '@/stores/postStore'
 import { useRoleStore } from '@/stores/rolesStore'
@@ -13,10 +14,10 @@ const postStore = usePostStore()
 const userStore = useUserStore()
 const roleStore = useRoleStore()
 
-const rol_level = parseInt(loginStore.user.rol_level)
+const { hasPermission, logged } = useRoles()
 
 watchEffect(() => {
-  if (loginStore.logged && rol_level >= 2) {
+  if (logged && hasPermission('consulta')) {
     userStore.loadItems()
     postStore.loadItems()
     roleStore.loadItems()
@@ -24,22 +25,20 @@ watchEffect(() => {
 })
 
 const stats = computed(() => [
-  { title: 'Posts', count: postStore.items.length },
-  { title: 'Users', count: userStore.items.length },
-  { title: 'Roles', count: roleStore.items.length },
+  { title: 'Posts', count: postStore.items?.length },
+  { title: 'Users', count: userStore.items?.length },
+  { title: 'Roles', count: roleStore.items?.length },
 ])
 
 const subtitle = computed(() =>
-  loginStore.logged
-    ? "It's great to see you again."
-    : 'You need to log in to see the information...',
+  logged ? "It's great to see you again." : 'You need to log in to see the information...',
 )
 </script>
 
 <template>
   <main class="welcome-container">
     <section class="welcome-panel">
-      <h1 v-if="loginStore.logged">
+      <h1 v-if="logged">
         Welcome, {{ `${loginStore.user.name} ${loginStore.user.last_name}` || 'new user' }}!
       </h1>
       <h1 v-else>Welcome, new user!</h1>
@@ -47,7 +46,7 @@ const subtitle = computed(() =>
         {{ subtitle }}
       </p>
 
-      <div v-if="loginStore.logged && rol_level >= 2">
+      <div v-if="logged && hasPermission('consulta')">
         <template v-if="postStore.loading || userStore.loading || roleStore.loading">
           <LoaderCard />
         </template>
@@ -56,7 +55,7 @@ const subtitle = computed(() =>
           <DashboardActions />
         </template>
       </div>
-      <div class="not-access" v-else-if="loginStore.logged && rol_level < 2">
+      <div class="not-access" v-else-if="logged">
         <p>You do not have permissions to request the information, only to access.</p>
       </div>
     </section>

@@ -52,6 +52,7 @@ const { form, errorsMessage, handleSubmit, handleCancel, formTitle } = useFormHa
           v-model="form[field.name]"
           :required="field.required"
           :disabled="store.loadingFetch"
+          :multiple="field.multiple"
         >
           <option v-for="option in field.options" :key="option.value" :value="option.value">
             {{ option.label }}

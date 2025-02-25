@@ -2,10 +2,15 @@
 import { useUserStore } from '@/stores/userStore'
 import { registerSchema, updateUserSchema } from '@/schemas/validateSchemas'
 import BaseForm from '@/components/BaseForm.vue'
+import { useRoleStore } from '@/stores/rolesStore'
+import { computed } from 'vue'
 
 const userStore = useUserStore()
+const rolesStore = useRoleStore()
 
-const fields = [
+if (rolesStore.items.length === 0) rolesStore.loadItems()
+
+const fields = computed(() => [
   { name: 'name', label: 'Name', type: 'text', required: true, placeholder: 'Javier' },
   { name: 'last_name', label: 'Last name', type: 'text', required: true, placeholder: 'Salazar' },
   {
@@ -27,15 +32,13 @@ const fields = [
     label: 'Role',
     type: 'select',
     required: true,
-    options: [
-      { value: '1', label: 'Rol básico' },
-      { value: '2', label: 'Rol medio' },
-      { value: '3', label: 'Rol medio alto' },
-      { value: '4', label: 'Rol alto medio' },
-      { value: '5', label: 'Rol alto' },
-    ],
+    multiple: false,
+    options: rolesStore.items.map((role) => ({
+      value: role.id.toString(),
+      label: role.name,
+    })),
   },
-]
+])
 
 const handleSubmit = async (data) => {
   try {

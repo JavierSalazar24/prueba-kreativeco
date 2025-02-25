@@ -37,8 +37,7 @@ export const apiService = {
 
   async post(url, data) {
     try {
-      const { id } = data
-      const response = await apiClient.post(`${url}/${id}`, data)
+      const response = await apiClient.post(url, data)
       notification(response.data.message, 'info')
       return response.data
     } catch (error) {

@@ -24,7 +24,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"name\": \"Javier\",\r\n  \"last_name\": \"Salazar\",\r\n  \"email\": \"javier@example.com\",\r\n  \"password\": \"12345678\",\r\n  \"rol_id\": 2\r\n}\r\n",
+          "raw": "{\r\n  \"name\": \"Javier\",\r\n  \"last_name\": \"Salazar\",\r\n  \"email\": \"javiers@example.com\",\r\n  \"password\": \"12345678\",\r\n  \"rol_id\": 2\r\n}\r\n",
           "options": {
             "raw": {
               "language": "json"
@@ -32,11 +32,11 @@
           }
         },
         "url": {
-          "raw": "https://kreativeco-api-production.up.railway.app/users/register.php",
+          "raw": "https://kreativeco-api-production.up.railway.app/api/users",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["users", "register.php"]
+          "path": ["api", "users"]
         }
       },
       "response": []
@@ -48,7 +48,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"email\": \"javier@actualizado.com\",\r\n    \"password\": \"09876543\"\r\n}",
+          "raw": "{\r\n    \"email\": \"javier@example.com\",\r\n    \"password\": \"12345678\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -56,11 +56,36 @@
           }
         },
         "url": {
-          "raw": "https://kreativeco-api-production.up.railway.app/users/login.php",
+          "raw": "https://kreativeco-api-production.up.railway.app/api/auth/login",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["users", "login.php"]
+          "path": ["api", "auth", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjYiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciIsImVtYWlsIjoiamF2aWVyQGV4YW1wbGUuY29tIiwicm9sIjoiUm9sIGFsdG8iLCJyb2xfbGV2ZWwiOiI1IiwiZXhwIjoxNzQxMDUxNDMyfQ.5vWaxa3EvqVVpI1_VehzlQjAqM6h5NYzeiFE4cuA8bo",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://kreativeco-api-production.up.railway.app/api/auth/logout",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "auth", "logout"]
         }
       },
       "response": []
@@ -73,7 +98,7 @@
           "bearer": [
             {
               "key": "token",
-              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjYiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciIsImVtYWlsIjoiamF2aWVyQGV4YW1wbGUuY29tIiwicm9sIjoiUm9sIGFsdG8iLCJyb2xlcyI6ImFjY2Vzbyxjb25zdWx0YSxhZ3JlZ2FyLGFjdHVhbGl6YXIsZWxpbWluYXIiLCJleHAiOjE3NDEwNzMwMjF9.hBBxcV8BT95IBE_J0QksfqLEUBN9A7i7ndk3DaqBCo0",
               "type": "string"
             }
           ]
@@ -82,7 +107,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"id\": 6,\r\n    \"name\": \"Javier actualizado\",\r\n    \"last_name\": \"Salazar actualizado\",\r\n    \"email\": \"javier@actualizado.com\",\r\n    \"password\": \"09876543\",\r\n    \"rol_id\": 5\r\n}\r\n",
+          "raw": "{\r\n    \"name\": \"Usuario\",\r\n    \"last_name\": \"Medio\",\r\n    \"email\": \"usuariomedio@example.com\",\r\n    \"password\": \"12345678\",\r\n    \"rol_id\": 2\r\n}\r\n",
           "options": {
             "raw": {
               "language": "json"
@@ -90,11 +115,11 @@
           }
         },
         "url": {
-          "raw": "https://kreativeco-api-production.up.railway.app/users/update_user.php",
+          "raw": "https://kreativeco-api-production.up.railway.app/api/users/2",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["users", "update_user.php"]
+          "path": ["api", "users", "2"]
         }
       },
       "response": []
@@ -116,7 +141,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"id\": 6\r\n}\r\n",
+          "raw": "",
           "options": {
             "raw": {
               "language": "json"
@@ -124,11 +149,11 @@
           }
         },
         "url": {
-          "raw": "https://kreativeco-api-production.up.railway.app/users/delete_user.php",
+          "raw": "https://kreativeco-api-production.up.railway.app/api/users/4",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["users", "delete_user.php"]
+          "path": ["api", "users", "4"]
         }
       },
       "response": []
@@ -141,7 +166,7 @@
           "bearer": [
             {
               "key": "token",
-              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciA1IiwiZW1haWwiOiJqYXZzc2FsYTVAZXhhbXBsZS5jb20iLCJyb2wiOiJSb2wgYWx0byIsInJvbF9sZXZlbCI6IjUiLCJleHAiOjE3NDA3Mjg2MjB9.HTw0tVLE04Pg6_ON5upszDcXM6TucFSdMYuuFNG6KxQ",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjYiLCJuYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiU2FsYXphciIsImVtYWlsIjoiamF2aWVyQGV4YW1wbGUuY29tIiwicm9sIjoiUm9sIGFsdG8iLCJyb2xfbGV2ZWwiOiI1IiwiZXhwIjoxNzQxMDU4OTYzfQ.qnlBbabP7ivQjcLHvLeDMQtV7ckrrEkDvr9GrsiiYZU",
               "type": "string"
             }
           ]
@@ -149,11 +174,11 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://kreativeco-api-production.up.railway.app/users/get_users.php",
+          "raw": "https://kreativeco-api-production.up.railway.app/api/users",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["users", "get_users.php"]
+          "path": ["api", "users"]
         }
       },
       "response": []
@@ -183,11 +208,11 @@
           }
         },
         "url": {
-          "raw": "https://kreativeco-api-production.up.railway.app/posts/create_post.php",
+          "raw": "https://kreativeco-api-production.up.railway.app/api/posts",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["posts", "create_post.php"]
+          "path": ["api", "posts"]
         }
       },
       "response": []
@@ -209,7 +234,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"id\": 4,\r\n    \"title\": \"Mi nuevo post actualizado\",\r\n    \"description\": \"Contenido del post actualizado\"\r\n}\r\n",
+          "raw": "{\r\n    \"id\": 7,\r\n    \"title\": \"Mi nuevo post actualizado\",\r\n    \"description\": \"Contenido del post actualizado\"\r\n}\r\n",
           "options": {
             "raw": {
               "language": "json"
@@ -217,11 +242,11 @@
           }
         },
         "url": {
-          "raw": "https://kreativeco-api-production.up.railway.app/posts/update_post.php",
+          "raw": "https://kreativeco-api-production.up.railway.app/api/posts",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["posts", "update_post.php"]
+          "path": ["api", "posts"]
         }
       },
       "response": []
@@ -243,7 +268,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"id\": 4\r\n}\r\n",
+          "raw": "{\r\n    \"id\": 7\r\n}\r\n",
           "options": {
             "raw": {
               "language": "json"
@@ -251,11 +276,11 @@
           }
         },
         "url": {
-          "raw": "https://kreativeco-api-production.up.railway.app/posts/delete_post.php",
+          "raw": "https://kreativeco-api-production.up.railway.app/api/posts",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["posts", "delete_post.php"]
+          "path": ["api", "posts"]
         }
       },
       "response": []
@@ -263,8 +288,50 @@
     {
       "name": "Get posts",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwibmFtZSI6IkphdmllciIsImxhc3RfbmFtZSI6IlNhbGF6YXIiLCJlbWFpbCI6ImphdmllckBleGFtcGxlLmNvbSIsInJvbCI6IlJvbCBhbHRvIiwicm9sX2xldmVsIjo1LCJleHAiOjE3NDEwMjA5Nzl9.bzQ0QHOT4FT8fZ_jbAHvI-PwyOXms0PDcROYiov4YOg",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "https://kreativeco-api-production.up.railway.app/api/posts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "posts"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwibmFtZSI6IkphdmllciIsImxhc3RfbmFtZSI6IlNhbGF6YXIiLCJlbWFpbCI6ImphdmllckBleGFtcGxlLmNvbSIsInJvbCI6IlJvbCBhbHRvIiwicm9sX2xldmVsIjo1LCJleHAiOjE3NDEwMjA5Nzl9.bzQ0QHOT4FT8fZ_jbAHvI-PwyOXms0PDcROYiov4YOg",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://kreativeco-api-production.up.railway.app/api/auth/check",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "auth", "check"]
+        }
       },
       "response": []
     }

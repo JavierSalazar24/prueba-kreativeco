@@ -1,16 +1,15 @@
 <script setup>
 import Swal from 'sweetalert2'
 import { usePostStore } from '@/stores/postStore'
-import LoaderCard from './LoaderCard.vue'
 import { formatDate } from '@/utils/formatDate'
-import { useLoginStore } from '@/stores/loginStore'
+import { useRoles } from '@/composables/useRoles'
+import LoaderCard from './LoaderCard.vue'
 import EmptyCard from './EmptyCard.vue'
 import CardBase from './CardBase.vue'
 
-const loginStore = useLoginStore()
 const postStore = usePostStore()
 
-const rol_level = parseInt(loginStore.user.rol_level)
+const { hasPermission } = useRoles()
 
 const updatePostId = (post) => {
   postStore.itemToEdit = { ...post }
@@ -47,8 +46,8 @@ const deletePostId = async (id) => {
         :description="post.description"
         :subText="`By: ${post.author} (${post.name})`"
         :littleSubText="`Created on: ${formatDate(post.date_created)}`"
-        :canEdit="rol_level >= 4 && !postStore.mePosts"
-        :canDelete="rol_level >= 5 && !postStore.mePosts"
+        :canEdit="hasPermission('actualizar') && !postStore.mePosts"
+        :canDelete="hasPermission('eliminar') && !postStore.mePosts"
         :store="postStore"
         @edit="updatePostId(post)"
         @delete="deletePostId(post.id)"
