@@ -37,7 +37,8 @@ export const apiService = {
 
   async post(url, data) {
     try {
-      const response = await apiClient.post(url, data)
+      const { id } = data
+      const response = await apiClient.post(`${url}/${id}`, data)
       notification(response.data.message, 'info')
       return response.data
     } catch (error) {
@@ -48,7 +49,8 @@ export const apiService = {
 
   async put(url, data) {
     try {
-      const response = await apiClient.put(url, data)
+      const { id } = data
+      const response = await apiClient.put(`${url}/${id}`, data)
       notification(response.data.message, 'success')
       return response.data
     } catch (error) {
@@ -59,7 +61,7 @@ export const apiService = {
 
   async delete(url, id) {
     try {
-      const response = await apiClient.delete(url, { data: id })
+      const response = await apiClient.delete(`${url}/${id}`)
       notification(response.data.message, 'success')
       return response.data
     } catch (error) {
@@ -68,16 +70,17 @@ export const apiService = {
     }
   },
 
-  async login(url, data) {
+  async login(url, user) {
     try {
-      const response = await apiClient.post(url, data)
-      const { token, user } = response.data
+      const response = await apiClient.post(url, user)
+      const { data } = response.data
+      const { token, user: userLogin } = data
 
       localStorage.setItem('token', token)
-      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('user', JSON.stringify(userLogin))
       localStorage.setItem('logged', 'true')
 
-      return user
+      return userLogin
     } catch (error) {
       notification(error.response?.data?.message || 'Error en el servidor', 'error')
       throw new Error(error.message)

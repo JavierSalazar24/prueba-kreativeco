@@ -1,4 +1,5 @@
 <script setup>
+import Swal from 'sweetalert2'
 import { useUserStore } from '@/stores/userStore'
 import LoaderCard from './LoaderCard.vue'
 import { useLoginStore } from '@/stores/loginStore'
@@ -17,11 +18,19 @@ const updateUserId = (user) => {
 }
 
 const deleteUserId = async (id) => {
-  try {
-    await userStore.removeItem({ id })
-  } catch (error) {
-    console.log(error)
-  }
+  Swal.fire({
+    title: 'Are you sure to remove it?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!',
+  }).then(async (result) => {
+    try {
+      if (result.isConfirmed) await userStore.removeItem(id)
+    } catch (error) {
+      console.log(error)
+    }
+  })
 }
 </script>
 

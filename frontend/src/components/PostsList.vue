@@ -1,11 +1,11 @@
 <script setup>
+import Swal from 'sweetalert2'
 import { usePostStore } from '@/stores/postStore'
 import LoaderCard from './LoaderCard.vue'
 import { formatDate } from '@/utils/formatDate'
 import { useLoginStore } from '@/stores/loginStore'
 import EmptyCard from './EmptyCard.vue'
 import CardBase from './CardBase.vue'
-import Swal from 'sweetalert2'
 
 const loginStore = useLoginStore()
 const postStore = usePostStore()
@@ -25,7 +25,7 @@ const deletePostId = async (id) => {
     confirmButtonText: 'Yes, delete it!',
   }).then(async (result) => {
     try {
-      if (result.isConfirmed) await postStore.removeItem({ id })
+      if (result.isConfirmed) await postStore.removeItem(id)
     } catch (error) {
       console.log(error)
     }

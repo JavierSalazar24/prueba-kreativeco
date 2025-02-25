@@ -4,5 +4,15 @@
     "vlucas/phpdotenv": "^5.6",
     "ext-pdo": "*",
     "ext-pdo_mysql": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Controllers\\": "app/controllers/",
+      "Models\\": "app/models/",
+      "Middleware\\": "app/middlewares/",
+      "Routes\\": "app/routes/",
+      "Config\\": "config/",
+      "Utils\\": "app/utils/"
+    }
   }
 }

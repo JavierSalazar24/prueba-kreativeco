@@ -1,4 +1,5 @@
 <script setup>
+import Swal from 'sweetalert2'
 import { useLoginStore } from '@/stores/loginStore'
 import LoaderCard from './LoaderCard.vue'
 import { useRoleStore } from '@/stores/rolesStore'
@@ -17,11 +18,19 @@ const updateRoleId = (role) => {
 }
 
 const deleteRoleId = async (id) => {
-  try {
-    await rolesStore.removeItem({ id })
-  } catch (error) {
-    console.log(error)
-  }
+  Swal.fire({
+    title: 'Are you sure to remove it?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!',
+  }).then(async (result) => {
+    try {
+      if (result.isConfirmed) await rolesStore.removeItem(id)
+    } catch (error) {
+      console.log(error)
+    }
+  })
 }
 </script>
 

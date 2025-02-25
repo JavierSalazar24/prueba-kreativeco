@@ -1,4 +1,4 @@
-import { getCheckAuth, loginUser, logoutUser } from '@/api/requestUsers'
+import { getCheckAuth, loginUser, logoutUser } from '@/api/requestLogin'
 import { notification } from '@/utils/notification'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
