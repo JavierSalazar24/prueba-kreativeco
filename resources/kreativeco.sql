@@ -7,12 +7,12 @@ USE kreativeco;
 -- Almacenará los tokens de los usuarios al cerrar sesión, para que no se vuelvan a utilizar
 -- =========================================
 
-CREATE TABLE revoked_tokens (
+CREATE TABLE IF NOT EXISTS revoked_tokens (
     `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
     `token` TEXT NOT NULL,
     `revoked_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =========================================
 -- Tabla: roles
@@ -21,11 +21,10 @@ CREATE TABLE revoked_tokens (
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
-  `permission_level` INT(11) NOT NULL,
+  `permissions` LONGTEXT NOT NULL,
   `deleted` TINYINT(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `permission_level` (`permission_level`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =========================================
 -- Tabla: users
@@ -43,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `rol_id` (`rol_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`) 
   ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =========================================
 -- Tabla: posts
@@ -60,17 +59,18 @@ CREATE TABLE IF NOT EXISTS `posts` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) 
   ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =========================================
 -- Insertar datos en la tabla roles
 -- =========================================
-INSERT INTO `roles` (`id`, `name`, `permission_level`, `deleted`) VALUES
-(1, 'Rol básico', 1, 0),
-(2, 'Rol medio', 2, 0),
-(3, 'Rol medio alto', 3, 0),
-(4, 'Rol alto medio', 4, 0),
-(5, 'Rol alto', 5, 0);
+INSERT INTO `roles` (`id`, `name`, `permissions`, `deleted`) VALUES
+(1, 'Rol básico', 'acceso', 0),
+(2, 'Rol medio', 'acceso,consulta', 0),
+(3, 'Rol medio alto', 'acceso,consulta,agregar', 0),
+(4, 'Rol alto medio', 'acceso,consulta,agregar,actualizar', 0),
+(5, 'Rol alto', 'acceso,consulta,agregar,actualizar,eliminar', 0),
+(7, 'Super user', 'acceso,consulta,agregar,actualizar,eliminar', 0);
 
 -- =========================================
 -- Insertar datos en la tabla users ** TODAS LAS CONTRASEÑAS SON 12345678 **
