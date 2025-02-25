@@ -32,7 +32,7 @@ Este proyecto es una aplicación web que permite la gestión de usuarios, roles 
 ```bash
 cd backend
 composer install
-php -S localhost:8000
+php -S localhost:8000 -t public
 ```
 
 > Esto iniciará el servidor en `http://localhost:8000/`.
